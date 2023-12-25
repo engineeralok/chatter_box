@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:chatter_box/common/entities/entities.dart';
 import 'package:chatter_box/common/utils/utils.dart';
-import 'package:chatter_box/common/values/values.dart';
-import 'package:http/http.dart' as http;
 
 class ChatAPI {
   static Future<BaseResponseEntity> bind_fcmtoken(

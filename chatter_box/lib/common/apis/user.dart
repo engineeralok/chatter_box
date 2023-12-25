@@ -1,6 +1,5 @@
 import 'package:chatter_box/common/entities/entities.dart';
 import 'package:chatter_box/common/utils/utils.dart';
-import 'package:chatter_box/common/values/values.dart';
 
 class UserAPI {
   static Future<UserLoginResponseEntity> Login({

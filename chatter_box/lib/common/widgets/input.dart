@@ -20,7 +20,7 @@ Widget inputTextEdit({
   return Container(
     height: height.h,
     margin: EdgeInsets.only(top: marginTop.h),
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       color: AppColors.secondaryElement,
       borderRadius: Radii.k6pxRadius,
     ),
@@ -32,8 +32,8 @@ Widget inputTextEdit({
       decoration: InputDecoration(
         hintText: hintText,
         suffixIcon: ClearWidget,
-        hintStyle: TextStyle(color: AppColors.thirdElementText),
-        contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+        hintStyle: const TextStyle(color: AppColors.thirdElementText),
+        contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         isDense: true,
         border: InputBorder.none,
       ),
@@ -65,7 +65,7 @@ Widget inputTextAreaEdit({
   return Container(
     height: 100.h,
     margin: EdgeInsets.only(top: marginTop.h),
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       color: AppColors.secondaryElement,
       borderRadius: Radii.k6pxRadius,
     ),
@@ -75,8 +75,8 @@ Widget inputTextAreaEdit({
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.thirdElementText),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintStyle: const TextStyle(color: AppColors.thirdElementText),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         border: InputBorder.none,
       ),
       style: TextStyle(
@@ -105,7 +105,7 @@ Widget inputEmailEdit({
   return Container(
     height: 44.h,
     margin: EdgeInsets.only(top: marginTop.h),
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       color: AppColors.primaryBackground,
       borderRadius: Radii.k6pxRadius,
       boxShadow: [
@@ -122,9 +122,9 @@ Widget inputEmailEdit({
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
-        contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 9),
+        contentPadding: const EdgeInsets.fromLTRB(20, 10, 0, 9),
         border: InputBorder.none,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: AppColors.primaryText,
         ),
       ),

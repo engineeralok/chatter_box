@@ -24,7 +24,7 @@ Widget netImageCached(
         ),
       ),
     ),
-    errorWidget: (context, url, error) => Image(
+    errorWidget: (context, url, error) => const Image(
       image: AssetImage('assets/images/feature-1.png'),
     ),
   );

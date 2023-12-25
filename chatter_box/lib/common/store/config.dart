@@ -11,19 +11,13 @@ class ConfigStore extends GetxController {
   bool isCallVocie = false;
   PackageInfo? _platform;
   String get version => _platform?.version ?? '-';
-  bool get isRelease => bool.fromEnvironment("dart.vm.product");
-  Locale locale = Locale('en', 'US');
+  bool get isRelease => const bool.fromEnvironment("dart.vm.product");
+  Locale locale = const Locale('en', 'US');
   List<Locale> languages = [
-    Locale('en', 'US'),
-    Locale('zh', 'CN'),
+    const Locale('en', 'US'),
+    const Locale('zh', 'CN'),
   ];
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    ///  isFirstOpen = StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY);
-  }
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
@@ -31,11 +25,11 @@ class ConfigStore extends GetxController {
 
   // 标记用户已打开APP
   Future<bool> saveAlreadyOpen() {
-    return StorageService.to.setBool(STORAGE_DEVICE_FIRST_OPEN_KEY, true);
+    return StorageService.to.setBool(storageDeviceFirstOpenKey, true);
   }
 
   void onInitLocale() {
-    var langCode = StorageService.to.getString(STORAGE_LANGUAGE_CODE);
+    var langCode = StorageService.to.getString(storageLanguageCode);
     if (langCode.isEmpty) return;
     var index = languages.indexWhere((element) {
       return element.languageCode == langCode;
@@ -47,6 +41,6 @@ class ConfigStore extends GetxController {
   void onLocaleUpdate(Locale value) {
     locale = value;
     Get.updateLocale(value);
-    StorageService.to.setString(STORAGE_LANGUAGE_CODE, value.languageCode);
+    StorageService.to.setString(storageLanguageCode, value.languageCode);
   }
 }

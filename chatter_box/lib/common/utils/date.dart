@@ -28,22 +28,22 @@ String duTimeLineFormat(DateTime dt) {
     return "${difference.inHours}h ago";
   }
   if (difference.inDays < 3) {
-    final dtFormat = new DateFormat('MM-dd hh:mm',Platform.localeName);
+    final dtFormat = DateFormat('MM-dd hh:mm',Platform.localeName);
     return dtFormat.format(dt);
   }
   // 30天内
   if (difference.inDays < 30) {
-    final dtFormat = new DateFormat('yy-MM-dd hh:mm',Platform.localeName);
+    final dtFormat = DateFormat('yy-MM-dd hh:mm',Platform.localeName);
     return dtFormat.format(dt);
   }
   // MM-dd
   else if (difference.inDays < 365) {
-    final dtFormat = new DateFormat('yy-MM-dd',Platform.localeName);
+    final dtFormat = DateFormat('yy-MM-dd',Platform.localeName);
     return dtFormat.format(dt);
   }
   // yyyy-MM-dd
   else {
-    final dtFormat = new DateFormat('yyyy-MM-dd',Platform.localeName);
+    final dtFormat = DateFormat('yyyy-MM-dd',Platform.localeName);
     var str = dtFormat.format(dt);
     return str;
   }

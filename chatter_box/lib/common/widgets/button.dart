@@ -14,7 +14,7 @@ Widget btnFlatButtonWidget({
   String fontName = "Montserrat",
   FontWeight fontWeight = FontWeight.w400,
 }) {
-  return Container(
+  return SizedBox(
     width: width.w,
     height: height.h,
     child: TextButton(
@@ -39,10 +39,11 @@ Widget btnFlatButtonWidget({
           }
           return gbColor;
         }),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
           borderRadius: Radii.k6pxRadius,
         )),
       ),
+      onPressed: onPressed,
       child: Text(
         title,
         textAlign: TextAlign.center,
@@ -53,7 +54,6 @@ Widget btnFlatButtonWidget({
           height: 1,
         ),
       ),
-      onPressed: onPressed,
     ),
   );
 }
@@ -65,7 +65,7 @@ Widget btnFlatButtonBorderOnlyWidget({
   double height = 44,
   required String iconFileName,
 }) {
-  return Container(
+  return SizedBox(
     width: width.w,
     height: height.h,
     child: TextButton(
@@ -90,14 +90,14 @@ Widget btnFlatButtonBorderOnlyWidget({
         //   }
         //   return AppColors.primaryElement;
         // }),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
           borderRadius: Radii.k6pxRadius,
         )),
       ),
+      onPressed: onPressed,
       child: Image.asset(
         "assets/images/icons-$iconFileName.png",
       ),
-      onPressed: onPressed,
     ),
   );
 }

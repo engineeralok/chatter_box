@@ -1,13 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:ui';
 import 'package:chatter_box/common/apis/apis.dart';
 import 'package:chatter_box/common/entities/entities.dart';
 import 'package:chatter_box/common/routes/names.dart';
 import 'package:chatter_box/common/store/store.dart';
 import 'package:chatter_box/common/values/values.dart';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -42,7 +37,7 @@ class FirebaseMassagingHandler {
   static Future<void> config() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     try {
-      RemoteMessage newMessage = RemoteMessage();
+      RemoteMessage newMessage = const RemoteMessage();
       await messaging.requestPermission(
         sound: true,
         badge: true,
@@ -60,8 +55,8 @@ class FirebaseMassagingHandler {
         print(initialMessage);
       }
       var initializationSettingsAndroid =
-          AndroidInitializationSettings("ic_launcher");
-      var darwinInitializationSettings = DarwinInitializationSettings();
+          const AndroidInitializationSettings("ic_launcher");
+      var darwinInitializationSettings = const DarwinInitializationSettings();
       var initializationSettings = InitializationSettings(
           android: initializationSettingsAndroid,
           iOS: darwinInitializationSettings);
@@ -77,27 +72,25 @@ class FirebaseMassagingHandler {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
         print("\n notification on onMessage function \n");
         print(message);
-        if (message != null) {
-          _receiveNotification(message);
-        }
-      });
+        _receiveNotification(message);
+            });
     } on Exception catch (e) {
       print("$e");
     }
   }
 
   static Future<void> _receiveNotification(RemoteMessage message) async {
-    if (message.data != null && message.data["call_type"] != null) {
+    if (message.data["call_type"] != null) {
       //  ////1. voice 2. video 3. text, 4.cancel
       if (message.data["call_type"] == "voice") {
         //  FirebaseMassagingHandler.flutterLocalNotificationsPlugin.cancelAll();
         var data = message.data;
-        var to_token = data["token"];
-        var to_name = data["name"];
-        var to_avatar = data["avatar"];
-        var doc_id = data["doc_id"] ?? "";
+        var toToken = data["token"];
+        var toName = data["name"];
+        var toAvatar = data["avatar"];
+        var docId = data["doc_id"] ?? "";
         // var call_role= data["call_type"];
-        if (to_token != null && to_name != null && to_avatar != null) {
+        if (toToken != null && toName != null && toAvatar != null) {
           Get.snackbar(
               icon: Container(
                 width: 40.w,
@@ -105,17 +98,17 @@ class FirebaseMassagingHandler {
                 padding: EdgeInsets.all(0.w),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.fill, image: NetworkImage(to_avatar)),
+                      fit: BoxFit.fill, image: NetworkImage(toAvatar)),
                   borderRadius: BorderRadius.all(Radius.circular(20.w)),
                 ),
               ),
-              "${to_name}",
+              "$toName",
               "Voice call",
-              duration: Duration(seconds: 30),
+              duration: const Duration(seconds: 30),
               isDismissible: false,
               mainButton: TextButton(
                   onPressed: () {},
-                  child: Container(
+                  child: SizedBox(
                       width: 90.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,10 +120,10 @@ class FirebaseMassagingHandler {
                               }
                               FirebaseMassagingHandler._sendNotifications(
                                   "cancel",
-                                  to_token,
-                                  to_avatar,
-                                  to_name,
-                                  doc_id);
+                                  toToken,
+                                  toAvatar,
+                                  toName,
+                                  docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -149,11 +142,11 @@ class FirebaseMassagingHandler {
                                 if (Get.isSnackbarOpen) {
                                   Get.closeAllSnackbars();
                                 }
-                                Get.toNamed(AppRoutes.VoiceCall, parameters: {
-                                  "to_token": to_token,
-                                  "to_name": to_name,
-                                  "to_avatar": to_avatar,
-                                  "doc_id": doc_id,
+                                Get.toNamed(AppRoutes.voiceCall, parameters: {
+                                  "to_token": toToken,
+                                  "to_name": toName,
+                                  "to_avatar": toAvatar,
+                                  "doc_id": docId,
                                   "call_role": "audience"
                                 });
                               },
@@ -176,13 +169,13 @@ class FirebaseMassagingHandler {
         //    FirebaseMassagingHandler.flutterLocalNotificationsPlugin.cancelAll();
         //  ////1. voice 2. video 3. text, 4.cancel
         var data = message.data;
-        var to_token = data["token"];
-        var to_name = data["name"];
-        var to_avatar = data["avatar"];
-        var doc_id = data["doc_id"] ?? "";
+        var toToken = data["token"];
+        var toName = data["name"];
+        var toAvatar = data["avatar"];
+        var docId = data["doc_id"] ?? "";
         // var call_role= data["call_type"];
-        if (to_token != null && to_name != null && to_avatar != null) {
-        ConfigStore.to.isCallVocie = true;
+        if (toToken != null && toName != null && toAvatar != null) {
+          ConfigStore.to.isCallVocie = true;
           Get.snackbar(
               icon: Container(
                 width: 40.w,
@@ -190,17 +183,17 @@ class FirebaseMassagingHandler {
                 padding: EdgeInsets.all(0.w),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.fill, image: NetworkImage(to_avatar)),
+                      fit: BoxFit.fill, image: NetworkImage(toAvatar)),
                   borderRadius: BorderRadius.all(Radius.circular(20.w)),
                 ),
               ),
-              "${to_name}",
+              "$toName",
               "Video call",
-              duration: Duration(seconds: 30),
+              duration: const Duration(seconds: 30),
               isDismissible: false,
               mainButton: TextButton(
                   onPressed: () {},
-                  child: Container(
+                  child: SizedBox(
                       width: 90.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,10 +205,10 @@ class FirebaseMassagingHandler {
                               }
                               FirebaseMassagingHandler._sendNotifications(
                                   "cancel",
-                                  to_token,
-                                  to_avatar,
-                                  to_name,
-                                  doc_id);
+                                  toToken,
+                                  toAvatar,
+                                  toName,
+                                  docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -234,11 +227,11 @@ class FirebaseMassagingHandler {
                                 if (Get.isSnackbarOpen) {
                                   Get.closeAllSnackbars();
                                 }
-                                Get.toNamed(AppRoutes.VideoCall, parameters: {
-                                  "to_token": to_token,
-                                  "to_name": to_name,
-                                  "to_avatar": to_avatar,
-                                  "doc_id": doc_id,
+                                Get.toNamed(AppRoutes.videoCall, parameters: {
+                                  "to_token": toToken,
+                                  "to_name": toName,
+                                  "to_avatar": toAvatar,
+                                  "doc_id": docId,
                                   "call_role": "audience"
                                 });
                               },
@@ -264,25 +257,25 @@ class FirebaseMassagingHandler {
           Get.closeAllSnackbars();
         }
 
-        if (Get.currentRoute.contains(AppRoutes.VoiceCall) ||
-            Get.currentRoute.contains(AppRoutes.VideoCall)) {
+        if (Get.currentRoute.contains(AppRoutes.voiceCall) ||
+            Get.currentRoute.contains(AppRoutes.videoCall)) {
           Get.back();
         }
 
-        var _prefs = await SharedPreferences.getInstance();
-        await _prefs.setString("CallVocieOrVideo", "");
+        var prefs = await SharedPreferences.getInstance();
+        await prefs.setString("CallVocieOrVideo", "");
       }
     }
   }
 
-  static Future<void> _sendNotifications(String call_type, String to_token,
-      String to_avatar, String to_name, String doc_id) async {
-    CallRequestEntity callRequestEntity = new CallRequestEntity();
-    callRequestEntity.call_type = call_type;
-    callRequestEntity.to_token = to_token;
-    callRequestEntity.to_avatar = to_avatar;
-    callRequestEntity.doc_id = doc_id;
-    callRequestEntity.to_name = to_name;
+  static Future<void> _sendNotifications(String callType, String toToken,
+      String toAvatar, String toName, String docId) async {
+    CallRequestEntity callRequestEntity = CallRequestEntity();
+    callRequestEntity.call_type = callType;
+    callRequestEntity.to_token = toToken;
+    callRequestEntity.to_avatar = toAvatar;
+    callRequestEntity.doc_id = docId;
+    callRequestEntity.to_name = toName;
     var res = await ChatAPI.call_notifications(params: callRequestEntity);
     print("sendNotifications");
     print(res);

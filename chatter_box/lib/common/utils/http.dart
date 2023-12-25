@@ -172,6 +172,7 @@ class HttpUtil {
           // return ErrorEntity(code: -1, message: error.message);
         }
     }
+    return null;
   }
 
   /*
@@ -210,7 +211,7 @@ class HttpUtil {
     bool cacheDisk = false,
   }) async {
     Options requestOptions = options ?? Options();
-    requestOptions.extra ??= Map();
+    requestOptions.extra ??= <String, dynamic>{};
     requestOptions.extra!.addAll({
       "refresh": refresh,
       "noCache": noCache,

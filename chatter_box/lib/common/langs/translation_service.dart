@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'en_US.dart';
-import 'zh_Hans.dart';
-import 'zh_HK.dart';
+import 'zh_hans.dart';
+import 'zh_hk.dart';
 
 /*
 
@@ -19,7 +19,7 @@ class TranslationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': en_US,
-        'zh_Hans': zh_Hans,
-        'zh_HK': zh_HK,
+        'zh_Hans': zhHans,
+        'zh_HK': zhHK,
       };
 }

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import './index.dart';
 
 class SignInPage extends GetView<SignInController> {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   Widget _buildLogo() {
     return Container(

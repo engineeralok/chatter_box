@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'index.dart';
 
 class MessagePage extends GetView<MessageController> {
-  const MessagePage({Key? key}) : super(key: key);
+  const MessagePage({super.key});
 
   Widget _buildPageHeadTitle(String title) {
     return Container(

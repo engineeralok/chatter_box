@@ -4,6 +4,7 @@ import 'package:chatter_box/common/routes/names.dart';
 import 'package:chatter_box/common/store/store.dart';
 import 'package:chatter_box/common/values/values.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseMassagingHandler {
   FirebaseMassagingHandler._();
-  static AndroidNotificationChannel channel_call =
+  static AndroidNotificationChannel channelCall =
       const AndroidNotificationChannel(
     'com.dbestech.chatter_box.call', // id
     'chatter_box_call', // title
@@ -21,7 +22,7 @@ class FirebaseMassagingHandler {
     playSound: true,
     sound: RawResourceAndroidNotificationSound('alert'),
   );
-  static AndroidNotificationChannel channel_message =
+  static AndroidNotificationChannel channelMessage =
       const AndroidNotificationChannel(
     'com.dbestech.chatter_box.message', // id
     'chatter_box_message', // title
@@ -51,8 +52,10 @@ class FirebaseMassagingHandler {
       RemoteMessage? initialMessage =
           await FirebaseMessaging.instance.getInitialMessage();
       if (initialMessage != null) {
-        print("initialMessage------");
-        print(initialMessage);
+        if (kDebugMode) {
+          print("initialMessage------");
+          print(initialMessage);
+        }
       }
       var initializationSettingsAndroid =
           const AndroidInitializationSettings("ic_launcher");
@@ -62,7 +65,9 @@ class FirebaseMassagingHandler {
           iOS: darwinInitializationSettings);
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onDidReceiveNotificationResponse: (value) {
-        print("----------onDidReceiveNotificationResponse");
+        if (kDebugMode) {
+          print("----------onDidReceiveNotificationResponse");
+        }
       });
 
       await FirebaseMessaging.instance
@@ -70,12 +75,16 @@ class FirebaseMassagingHandler {
               alert: true, badge: true, sound: true);
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-        print("\n notification on onMessage function \n");
-        print(message);
+        if (kDebugMode) {
+          print("\n notification on onMessage function \n");
+          print(message);
+        }
         _receiveNotification(message);
-            });
+      });
     } on Exception catch (e) {
-      print("$e");
+      if (kDebugMode) {
+        print("$e");
+      }
     }
   }
 
@@ -119,11 +128,7 @@ class FirebaseMassagingHandler {
                                 Get.closeAllSnackbars();
                               }
                               FirebaseMassagingHandler._sendNotifications(
-                                  "cancel",
-                                  toToken,
-                                  toAvatar,
-                                  toName,
-                                  docId);
+                                  "cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -204,11 +209,7 @@ class FirebaseMassagingHandler {
                                 Get.closeAllSnackbars();
                               }
                               FirebaseMassagingHandler._sendNotifications(
-                                  "cancel",
-                                  toToken,
-                                  toAvatar,
-                                  toName,
-                                  docId);
+                                  "cancel", toToken, toAvatar, toName, docId);
                             },
                             child: Container(
                               width: 40.w,
@@ -276,11 +277,15 @@ class FirebaseMassagingHandler {
     callRequestEntity.to_avatar = toAvatar;
     callRequestEntity.doc_id = docId;
     callRequestEntity.to_name = toName;
-    var res = await ChatAPI.call_notifications(params: callRequestEntity);
-    print("sendNotifications");
-    print(res);
+    var res = await ChatAPI.callNotifications(params: callRequestEntity);
+    if (kDebugMode) {
+      print("sendNotifications");
+      print(res);
+    }
     if (res.code == 0) {
-      print("sendNotifications success");
+      if (kDebugMode) {
+        print("sendNotifications success");
+      }
     } else {
       // Get.snackbar("Tips", "Notification error!");
       // Get.offAllNamed(AppRoutes.Message);
@@ -300,8 +305,8 @@ class FirebaseMassagingHandler {
         notification.body,
         NotificationDetails(
           android: AndroidNotificationDetails(
-            channel_message.id,
-            channel_message.name,
+            channelMessage.id,
+            channelMessage.name,
             icon: "@mipmap/ic_launcher",
             playSound: true,
             enableVibration: true,

@@ -1,4 +1,5 @@
 import 'package:chatter_box/common/entities/entities.dart';
+import 'package:chatter_box/common/routes/names.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -34,6 +35,7 @@ class SignInController extends GetxController {
             loginPanelListEntityRequestEntity.email = email;
             loginPanelListEntityRequestEntity.openId = id;
             loginPanelListEntityRequestEntity.type = 2;
+            asyncPostAlldata();
           } else {
             if (kDebugMode) {
               print("...login type not sure...");
@@ -50,5 +52,9 @@ class SignInController extends GetxController {
         print('...error with login $e');
       }
     }
+  }
+
+  asyncPostAlldata() {
+    Get.offAllNamed(AppRoutes.message);
   }
 }

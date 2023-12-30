@@ -4,16 +4,16 @@ import 'package:chatter_box/common/entities/entities.dart';
 import 'package:chatter_box/common/utils/utils.dart';
 
 class ChatAPI {
-  static Future<BaseResponseEntity> bind_fcmtoken(
+  static Future<BaseResponseEntity> bindFcmtoken(
       {BindFcmTokenRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/bind_fcmtoken',
+      'api/bindFcmtoken',
       queryParameters: params?.toJson(),
     );
     return BaseResponseEntity.fromJson(response);
   }
 
-  static Future<BaseResponseEntity> call_notifications(
+  static Future<BaseResponseEntity> callNotifications(
       {CallRequestEntity? params}) async {
     var response = await HttpUtil().post(
       'api/send_notice',
@@ -22,7 +22,7 @@ class ChatAPI {
     return BaseResponseEntity.fromJson(response);
   }
 
-  static Future<BaseResponseEntity> call_token(
+  static Future<BaseResponseEntity> callToken(
       {CallTokenRequestEntity? params}) async {
     var response = await HttpUtil().post(
       'api/get_rtc_token',
@@ -31,7 +31,7 @@ class ChatAPI {
     return BaseResponseEntity.fromJson(response);
   }
 
-  static Future<BaseResponseEntity> send_message(
+  static Future<BaseResponseEntity> sendMessage(
       {ChatRequestEntity? params}) async {
     var response = await HttpUtil().post(
       'api/message',
@@ -40,7 +40,7 @@ class ChatAPI {
     return BaseResponseEntity.fromJson(response);
   }
 
-  static Future<BaseResponseEntity> upload_img({File? file}) async {
+  static Future<BaseResponseEntity> uploadImg({File? file}) async {
     String fileName = file!.path.split('/').last;
 
     FormData data = FormData.fromMap({
@@ -56,7 +56,7 @@ class ChatAPI {
     return BaseResponseEntity.fromJson(response);
   }
 
-  static Future<SyncMessageResponseEntity> sync_message(
+  static Future<SyncMessageResponseEntity> syncMessage(
       {SyncMessageRequestEntity? params}) async {
     var response = await HttpUtil().post(
       'api/sync_message',

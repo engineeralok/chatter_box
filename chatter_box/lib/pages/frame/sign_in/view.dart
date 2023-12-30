@@ -1,4 +1,5 @@
 import 'package:chatter_box/common/values/values.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ class SignInPage extends GetView<SignInController> {
     return Container(
       margin: EdgeInsets.only(top: 100.h, bottom: 80.h),
       child: Text(
-        "Chatter Box .",
+        "Chatter Box o.O",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: AppColors.primaryText,
@@ -26,7 +27,11 @@ class SignInPage extends GetView<SignInController> {
   Widget _buildThirdPartyLogin(String loginType, String logo) {
     return GestureDetector(
       onTap: () {
-        print("...sign up from $loginType...");
+        if (kDebugMode) {
+          print("...sign up from $loginType...");
+        }
+
+        controller.hanleSignIn("google");
       },
       child: Container(
         width: 295.w,

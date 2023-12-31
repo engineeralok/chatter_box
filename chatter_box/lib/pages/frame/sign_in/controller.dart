@@ -35,6 +35,7 @@ class SignInController extends GetxController {
             loginPanelListEntityRequestEntity.email = email;
             loginPanelListEntityRequestEntity.openId = id;
             loginPanelListEntityRequestEntity.type = 2;
+            // UserStore.to.isLogin = true;
             asyncPostAlldata();
           } else {
             if (kDebugMode) {
@@ -55,6 +56,9 @@ class SignInController extends GetxController {
   }
 
   asyncPostAlldata() {
+    if (kDebugMode) {
+      print("...Let's go to message page...");
+    }
     Get.offAllNamed(AppRoutes.message);
   }
 }

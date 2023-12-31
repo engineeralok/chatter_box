@@ -8,11 +8,11 @@ import 'package:get/get.dart';
 class UserStore extends GetxController {
   static UserStore get to => Get.find();
 
-  // 是否登录
+  // Log in or not
   final _isLogin = false.obs;
-  // 令牌 token
+  // token
   String token = '';
-  // 用户 profile
+  // profile
   final _profile = UserItem().obs;
 
   bool get isLogin => _isLogin.value;
@@ -56,10 +56,10 @@ class UserStore extends GetxController {
   // during logout
   Future<void> onLogout() async {
     // if (_isLogin.value) await UserAPI.logout();
-    await StorageService.to.remove(storageUserTokenKey);
+    /*  await StorageService.to.remove(storageUserTokenKey);
     await StorageService.to.remove(storageUserProfileKey);
     _isLogin.value = false;
-    token = '';
+    token = ''; */
     Get.offAllNamed(AppRoutes.signIN);
   }
 }

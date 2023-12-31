@@ -8,17 +8,62 @@ import 'index.dart';
 class MessagePage extends GetView<MessageController> {
   const MessagePage({super.key});
 
-  Widget _buildPageHeadTitle(String title) {
-    return Container(
-      margin: EdgeInsets.only(top: 350.h),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: AppColors.primaryElementText,
-          fontFamily: "Montserrat",
-          fontWeight: FontWeight.bold,
-          fontSize: 45.sp,
+  //slivers :
+  Widget _headBar() {
+    return Center(
+      child: Container(
+        width: 320.w,
+        height: 44.w,
+        margin: EdgeInsets.only(bottom: 20.h, top: 20.h),
+        child: Row(
+          children: [
+            Stack(
+              children: [
+                GestureDetector(
+                  child: Container(
+                    width: 44.h,
+                    height: 44.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.primarySecondaryBackground,
+                      borderRadius: BorderRadius.all(Radius.circular(22.r)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 2,
+                          offset: const Offset(0, 1),
+                        )
+                      ],
+                    ),
+                    child: controller.state.head_detail.value.avatar == null
+                        ? const Image(
+                            image:
+                                AssetImage("assets/images/account_header.png"))
+                        : const Text("Hi"),
+                  ),
+                  onTap: () {
+                    controller.goProfile();
+                  },
+                ),
+                Positioned(
+                  bottom: 5.w,
+                  right: 0.w,
+                  height: 14.w,
+                  child: Container(
+                    width: 14.w,
+                    height: 14.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2.w,
+                          color: AppColors.primaryElementText,
+                        ),
+                        color: AppColors.primaryElementStatus,
+                        borderRadius: BorderRadius.all(Radius.circular(12.r))),
+                  ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -27,12 +72,20 @@ class MessagePage extends GetView<MessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryElement,
-      body: SizedBox(
-        width: 360.w,
-        height: 780.h,
-        // child: _buildPageHeadTitle(controller.title),
+        // backgroundColor: AppColors.primaryElement,
+        body: SafeArea(
+      child: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                title: _headBar(),
+              ),
+            ],
+          )
+        ],
       ),
-    );
+    ));
   }
 }

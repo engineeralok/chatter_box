@@ -1,4 +1,5 @@
 import 'package:chatter_box/common/routes/pages.dart';
+import 'package:chatter_box/common/style/theme.dart';
 import 'package:chatter_box/global.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,11 +19,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 780),
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        title: 'Chatter Box',
+        theme: AppTheme.light,
         initialRoute: AppPages.initial,
         getPages: AppPages.routes,
       ),

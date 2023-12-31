@@ -1,3 +1,4 @@
+import 'package:chatter_box/pages/profile/index.dart';
 import 'package:flutter/material.dart';
 import 'package:chatter_box/common/middlewares/middlewares.dart';
 
@@ -22,7 +23,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.signIN,
-      page: () =>const SignInPage(),
+      page: () => const SignInPage(),
       binding: SignInBinding(),
     ),
 
@@ -53,8 +54,12 @@ class AppPages {
         RouteAuthMiddleware(priority: 1),
       ],
     ),
-    // //我的
-    // GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
+    // Profile Section
+    GetPage(
+      name: AppRoutes.profile,
+      page: () =>const ProfilePage(),
+      binding: ProfileBinding(),
+    ),
     // //聊天详情
     // GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
 

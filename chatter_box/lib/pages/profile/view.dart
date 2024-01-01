@@ -1,4 +1,3 @@
-import 'package:chatter_box/common/style/style.dart';
 import 'package:chatter_box/common/values/colors.dart';
 import 'package:chatter_box/pages/profile/index.dart';
 import 'package:flutter/foundation.dart';
@@ -47,12 +46,13 @@ class ProfilePage extends GetView<ProfileController> {
         ),
         Positioned(
             bottom: 20.w,
-            right: 8.w,
+            right: 0.w,
             height: 35.w,
             child: GestureDetector(
               child: Container(
                 height: 35.w,
                 width: 35.w,
+                padding: EdgeInsets.all(7.w),
                 decoration: BoxDecoration(
                   color: AppColors.primaryElement,
                   borderRadius: BorderRadius.all(Radius.circular(40.r)),
@@ -106,7 +106,7 @@ class ProfilePage extends GetView<ProfileController> {
       child: Container(
         width: 295.w,
         height: 44.h,
-        margin: EdgeInsets.only(top: 60.h, bottom: 30.h),
+        margin: EdgeInsets.only(top: 0.h, bottom: 30.h),
         decoration: BoxDecoration(
           color: AppColors.primarySecondaryElementText,
           borderRadius: BorderRadius.all(Radius.circular(5.w)),

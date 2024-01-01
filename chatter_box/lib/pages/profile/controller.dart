@@ -1,4 +1,3 @@
-import 'package:chatter_box/common/routes/names.dart';
 import 'package:chatter_box/common/store/store.dart';
 import 'package:chatter_box/pages/profile/index.dart';
 import 'package:get/get.dart';
